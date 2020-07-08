@@ -1,0 +1,77 @@
+using "native.h" as native
+using arch as os_arch
+using type as os_type
+
+export using "native.h"::{
+  Arch,
+  Type
+}
+
+/**
+ * Operating system-specific "end-of-line" marker.
+ * <ul>
+ *   <li>POSIX: <code>\n</code></li>
+ *   <li>Windows: <code>\r\n</code></li>
+ * </ul>
+ */
+export const char *EOL = native::EOL;
+
+/**
+ * Returns the detected operating system type.
+ * Example:
+ * <pre>
+ *   <code>
+ *     switch os::type() {
+ *       os::type::POSIX () => { }
+ *       default => {
+ *         error.fail(err::NotImplemented, "Unsupported OS");
+ *       }
+ *     }
+ *   </code>
+ * </pre>
+ */
+export fn type() -> native::Type
+  model symbol(return)
+if #(native::IS_APPLE) {
+  return os_type::apple;
+} else if #(native::IS_LINUX) {
+  return os_type::linux;
+} else if #(native::IS_UNIX) {
+  return os_type::unix;
+} else if #(native::IS_POSIX) {
+  return os_type::posix;
+} else if #(native::IS_WINDOWS) {
+  return os_type::windows;
+} else {
+  return os_type::unknown;
+}
+
+/**
+ * Returns the detected operating system architecture at compile time.
+ * Example:
+ * <pre>
+ *   <code>
+ *   </code>
+ * </pre>
+ */
+export fn arch() -> native::Arch
+  model symbol(return)
+if #(native::IS_I386) {
+  return os_arch::ia32;
+} else if #(native::IS_AMD64) {
+  return os_arch::x64;
+} else if #(native::IS_AMD) {
+  return os_arch::x32;
+} else if #(native::IS_ARM64) {
+  return os_arch::arm64;
+} else if #(native::IS_ARM) {
+  return os_arch::arm;
+} else if #(native::IS_PPC64) {
+  return os_arch::ppc64;
+} else if #(native::IS_PPC) {
+  return os_arch::ppc;
+} else if #(native::IS_MIPS) {
+  return os_arch::mips;
+} else {
+  return os_arch::unknown;
+}

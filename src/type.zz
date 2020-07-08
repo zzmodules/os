@@ -1,0 +1,19 @@
+using "native.h"::{ Type }
+using symbols
+
+export symbol apple;
+export symbol linux;
+export symbol posix;
+export symbol unix;
+export symbol unknown;
+export symbol windows;
+
+/**
+ * Get the C string representation of a operating system type symbol.
+ */
+export fn nameof(Type type) -> char *
+  model symbol(type)
+  where symbol(type)
+{
+  return symbols::nameof(type);
+}

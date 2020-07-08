@@ -1,0 +1,7 @@
+export using "native.h"::{
+  os_detect_apple as apple,
+  os_detect_linux as linux,
+  os_detect_posix as posix,
+  os_detect_unix as unix,
+  os_detect_windows as windows,
+}

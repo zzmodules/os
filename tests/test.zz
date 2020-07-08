@@ -1,0 +1,46 @@
+using err
+using log
+using os
+using symbols
+
+fn detect() -> os::Type
+  if #(os::detect::apple) {
+    return os::type::apple;
+  } else if #(os::detect::linux) {
+    return os::type::linux;
+  } else if #(os::detect::unix) {
+    return os::type::unix;
+  } else if #(os::detect::posix) {
+    return os::type::posix;
+  } else if #(os::detect::windows) {
+    return os::type::windows;
+  } else {
+    err::panic("unknown operating system");
+    return 0;
+  }
+
+fn main() -> int {
+  log::info("type=%s", os::type::nameof(os::type()));
+  log::info("arch=%s", os::arch::nameof(os::arch()));
+
+  if os::arch() == os::arch::arm { }
+  else if os::arch() == os::arch::arm64 { }
+  else if os::arch() == os::arch::ia32 { }
+  else if os::arch() == os::arch::mips { }
+  else if os::arch() == os::arch::ppc { }
+  else if os::arch() == os::arch::ppc64 { }
+  else if os::arch() == os::arch::x32 { }
+  else if os::arch() == os::arch::x64 { }
+  else { err::panic("unknown architecture"); }
+
+  if os::type() == os::type::apple { }
+  else if os::type() == os::type::linux { }
+  else if os::type() == os::type::posix { }
+  else if os::type() == os::type::unix { }
+  else if os::type() == os::type::windows { }
+  else { err::panic("unknown operating system"); }
+
+  err::assert(os::type() == detect());
+
+  return 0;
+}

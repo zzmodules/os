@@ -1,0 +1,22 @@
+using "native.h"::{ Arch }
+using symbols
+
+export symbol arm;
+export symbol arm64;
+export symbol ia32;
+export symbol mips;
+export symbol ppc;
+export symbol ppc64;
+export symbol unknown;
+export symbol x32;
+export symbol x64;
+
+/**
+ * Get the C string representation of a operating system architecture symbol.
+ */
+export fn nameof(Arch arch) -> char *
+  model symbol(arch)
+  where symbol(arch)
+{
+  return symbols::nameof(arch);
+}
