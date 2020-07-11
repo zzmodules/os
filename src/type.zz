@@ -1,4 +1,6 @@
-using "native.h"::{ Type }
+using <os/type.h>::{ Type }
+
+using detect
 using symbols
 
 export symbol apple;
@@ -11,9 +13,39 @@ export symbol windows;
 /**
  * Get the C string representation of a operating system type symbol.
  */
-export fn nameof(Type type) -> char *
+export fn nameof(usize type) -> char *
   model symbol(type)
   where symbol(type)
 {
   return symbols::nameof(type);
 }
+
+/**
+ * Returns the detected operating system type.
+ * <pre>
+ * Example:
+ *   <code>
+ *     switch os::type::get() {
+ *       os::type::POSIX () => { }
+ *       default => {
+ *         error.fail(err::NotImplemented, "Unsupported OS");
+ *       }
+ *     }
+ *   </code>
+ * </pre>
+ */
+export inline fn get() -> Type
+  model symbol(return)
+  if #(detect::apple) {
+    return apple;
+  } else if #(detect::linux) {
+    return linux;
+  } else if #(detect::unix) {
+    return unix;
+  } else if #(detect::posix) {
+    return posix;
+  } else if #(detect::windows) {
+    return windows;
+  } else {
+    return unknown;
+  }

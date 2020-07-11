@@ -1,7 +1,15 @@
-export using "native.h"::{
-  os_detect_apple as apple,
-  os_detect_linux as linux,
-  os_detect_posix as posix,
-  os_detect_unix as unix,
-  os_detect_windows as windows,
+export using <os/detect.h>::{
+  OS_IS_AMD as amd,
+  OS_IS_AMD64 as amd64,
+  OS_IS_APPLE as apple,
+  OS_IS_ARM as arm,
+  OS_IS_ARM64 as arm64,
+  OS_IS_I386 as i386,
+  OS_IS_LINUX as linux,
+  OS_IS_MIPS as mips,
+  OS_IS_POSIX as posix,
+  OS_IS_PPC as ppc,
+  OS_IS_PPC64 as ppc64,
+  OS_IS_UNIX as unix,
+  OS_IS_WINDOWS as windows,
 }

@@ -1,0 +1,21 @@
+using detect
+using type
+using err
+
+export struct SystemInformation {
+  uint uptime;
+}
+
+/*
+export fn make(SystemInformation new mut *self) {
+  init(self);
+}
+
+export fn init(SystemInformation mut *self)
+  if #(detect::apple) {
+    err::panic("Unsupported operating system: %s", type::nameof(type::get()));
+  } else if #(detect::windows) {
+    err::panic("Unsupported operating system: %s", type::nameof(type::get()));
+  } else {
+  }
+*/

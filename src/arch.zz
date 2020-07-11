@@ -1,4 +1,4 @@
-using "native.h"::{ Arch }
+using detect
 using symbols
 
 export symbol arm;
@@ -14,9 +14,39 @@ export symbol x64;
 /**
  * Get the C string representation of a operating system architecture symbol.
  */
-export fn nameof(Arch arch) -> char *
+export fn nameof(usize arch) -> char *
   model symbol(arch)
   where symbol(arch)
 {
   return symbols::nameof(arch);
+}
+
+/**
+ * Returns the detected operating system architecture at compile time.
+ * Example:
+ * <pre>
+ *   <code>
+ *   </code>
+ * </pre>
+ */
+export fn get() -> usize
+  model symbol(return)
+if #(detect::i386) {
+  return ia32;
+} else if #(detect::amd64) {
+  return x64;
+} else if #(detect::amd) {
+  return x32;
+} else if #(detect::arm64) {
+  return arm64;
+} else if #(detect::arm) {
+  return arm;
+} else if #(detect::ppc64) {
+  return ppc64;
+} else if #(detect::ppc) {
+  return ppc;
+} else if #(detect::mips) {
+  return mips;
+} else {
+  return unknown;
 }

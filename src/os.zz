@@ -1,0 +1,38 @@
+using <os/type.h>::{ Type }
+
+using arch::{ get as get_arch }
+using type::{ get as get_type }
+
+/**
+ * Returns the detected operating system type.
+ * Example:
+ * <pre>
+ *   <code>
+ *     switch os::type() {
+ *       os::type::POSIX () => { }
+ *       default => {
+ *         error.fail(err::NotImplemented, "Unsupported OS");
+ *       }
+ *     }
+ *   </code>
+ * </pre>
+ */
+export fn type() -> Type
+  model symbol(return)
+{
+  return get_type();
+}
+
+/**
+ * Returns the detected operating system architecture at compile time.
+ * Example:
+ * <pre>
+ *   <code>
+ *   </code>
+ * </pre>
+ */
+export fn arch() -> usize
+  model symbol(return)
+{
+  return get_arch();
+}

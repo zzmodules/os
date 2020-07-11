@@ -1,0 +1,26 @@
+using <os/eol.h>::{
+  WINDOWS_EOL,
+  POSIX_EOL,
+}
+
+using detect
+
+/**
+ * Returns the pperating system-specific "end-of-line" marker.
+ * <ul>
+ *   <li>POSIX: <code>\n</code></li>
+ *   <li>Windows: <code>\r\n</code></li>
+ * </ul>
+ */
+export inline fn get() -> char *
+  model safe(return)
+  model nullterm(return)
+  if #(detect::windows) {
+    static_attest(safe(WINDOWS_EOL));
+    static_attest(nullterm(WINDOWS_EOL));
+    return WINDOWS_EOL;
+  } else {
+    static_attest(safe(POSIX_EOL));
+    static_attest(nullterm(POSIX_EOL));
+    return POSIX_EOL;
+  }
