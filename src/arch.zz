@@ -28,10 +28,11 @@ export fn nameof(usize arch) -> char *
  * Example:
  * <pre>
  *   <code>
+ *     let arch = os::arch::get();
  *   </code>
  * </pre>
  */
-export fn get() -> Arch
+export inline fn get() -> Arch
   model symbol(return)
 if #(detect::i386) {
   return ia32;

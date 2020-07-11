@@ -7,10 +7,12 @@ using detect
 
 /**
  * Returns the pperating system-specific "end-of-line" marker.
- * <ul>
- *   <li>POSIX: <code>\n</code></li>
- *   <li>Windows: <code>\r\n</code></li>
- * </ul>
+ * Example:
+ * <pre>
+ *   <code>
+ *     let eol = os::eol::get();
+ *   </code>
+ * </pre>
  */
 export fn get() -> char *
   model safe(return)

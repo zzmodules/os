@@ -25,12 +25,7 @@ export fn nameof(usize type) -> char *
  * <pre>
  * Example:
  *   <code>
- *     switch os::type::get() {
- *       os::type::POSIX () => { }
- *       default => {
- *         error.fail(err::NotImplemented, "Unsupported OS");
- *       }
- *     }
+ *     let type = os::type::get();
  *   </code>
  * </pre>
  */

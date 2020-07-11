@@ -5,34 +5,15 @@ using eol::{ get as get_eol }
 using type::{ get as get_type }
 
 /**
- * Returns the detected operating system type.
- * Example:
- * <pre>
- *   <code>
- *     switch os::type() {
- *       os::type::POSIX () => { }
- *       default => {
- *         error.fail(err::NotImplemented, "Unsupported OS");
- *       }
- *     }
- *   </code>
- * </pre>
- */
-export fn type() -> Type
-  model symbol(return)
-{
-  return get_type();
-}
-
-/**
  * Returns the detected operating system architecture at compile time.
  * Example:
  * <pre>
  *   <code>
+ *     let arch = os::arch();
  *   </code>
  * </pre>
  */
-export fn arch() -> Arch
+export inline fn arch() -> Arch
   model symbol(return)
 {
   return get_arch();
@@ -43,6 +24,7 @@ export fn arch() -> Arch
  * Example:
  * <pre>
  *   <code>
+ *     let eol = os::eol();
  *   </code>
  * </pre>
  */
@@ -52,4 +34,19 @@ export fn eol() -> char *
   model 1 == len(return) || 2 == len(return)
 {
   return get_eol();
+}
+
+/**
+ * Returns the detected operating system type.
+ * Example:
+ * <pre>
+ *   <code>
+ *     let type = os::type();
+ *   </code>
+ * </pre>
+ */
+export inline fn type() -> Type
+  model symbol(return)
+{
+  return get_type();
 }
