@@ -1,6 +1,7 @@
-using <os/type.h>::{ Type }
+using <os/type.h>::{ Arch, Type }
 
 using arch::{ get as get_arch }
+using eol::{ get as get_eol }
 using type::{ get as get_type }
 
 /**
@@ -31,8 +32,24 @@ export fn type() -> Type
  *   </code>
  * </pre>
  */
-export fn arch() -> usize
+export fn arch() -> Arch
   model symbol(return)
 {
   return get_arch();
+}
+
+/**
+ * Returns the detected operating system specific "end-of-line" marker.
+ * Example:
+ * <pre>
+ *   <code>
+ *   </code>
+ * </pre>
+ */
+export fn eol() -> char *
+  model safe(return)
+  model nullterm(return)
+  model 1 == len(return) || 2 == len(return)
+{
+  return get_eol();
 }

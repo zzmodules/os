@@ -1,0 +1,17 @@
+using err::{ assert }
+using log
+using mem
+using os
+
+fn main() -> int
+if #(os::detect::windows) {
+  let eol = os::eol();
+  static_attest(2 == len(eol));
+  assert(mem::eq("\r\n", eol, 2));
+  return 0;
+} else {
+  let eol = os::eol();
+  static_attest(1 == len(eol));
+  assert(mem::eq("\n", eol, 1));
+  return 0;
+}

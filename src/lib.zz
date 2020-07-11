@@ -1,9 +1,16 @@
+/**
+ * Native types for this module.
+ */
 export using <os/type.h>::{
   Arch,
   Type,
 }
 
+/**
+ * Operating system functions.
+ */
 export using os::{
   arch,
+  eol,
   type,
 }

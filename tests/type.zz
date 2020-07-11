@@ -1,0 +1,29 @@
+using err::{ assert, panic }
+using os
+
+fn detect() -> os::Type
+  if #(os::detect::apple) {
+    return os::type::apple;
+  } else if #(os::detect::linux) {
+    return os::type::linux;
+  } else if #(os::detect::unix) {
+    return os::type::unix;
+  } else if #(os::detect::posix) {
+    return os::type::posix;
+  } else if #(os::detect::windows) {
+    return os::type::windows;
+  } else {
+    panic("unknown operating system");
+    return 0;
+  }
+
+fn main() -> int {
+  assert(os::type() == detect());
+  if os::type() == os::type::apple { }
+  else if os::type() == os::type::linux { }
+  else if os::type() == os::type::posix { }
+  else if os::type() == os::type::unix { }
+  else if os::type() == os::type::windows { }
+  else { panic("unknown operating system"); }
+  return 0;
+}

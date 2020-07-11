@@ -1,3 +1,5 @@
+using <os/type.h>::{ Arch }
+
 using detect
 using symbols
 
@@ -29,7 +31,7 @@ export fn nameof(usize arch) -> char *
  *   </code>
  * </pre>
  */
-export fn get() -> usize
+export fn get() -> Arch
   model symbol(return)
 if #(detect::i386) {
   return ia32;

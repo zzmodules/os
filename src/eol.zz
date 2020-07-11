@@ -12,15 +12,20 @@ using detect
  *   <li>Windows: <code>\r\n</code></li>
  * </ul>
  */
-export inline fn get() -> char *
+export fn get() -> char *
   model safe(return)
   model nullterm(return)
+  model 1 == len(return) || 2 == len(return)
   if #(detect::windows) {
-    static_attest(safe(WINDOWS_EOL));
-    static_attest(nullterm(WINDOWS_EOL));
-    return WINDOWS_EOL;
+    let eol = as<char *>(WINDOWS_EOL);
+    static_attest(safe(eol));
+    static_attest(nullterm(eol));
+    static_attest(2 == len(eol));
+    return eol;
   } else {
-    static_attest(safe(POSIX_EOL));
-    static_attest(nullterm(POSIX_EOL));
-    return POSIX_EOL;
+    let eol = as<char *>(POSIX_EOL);
+    static_attest(safe(eol));
+    static_attest(nullterm(eol));
+    static_attest(1 == len(eol));
+    return eol;
   }

@@ -1,0 +1,38 @@
+using err::{ assert, panic }
+using os
+
+fn detect() -> os::Arch
+  if #(os::detect::arm) {
+    return os::arch::arm;
+  } else if #(os::detect::arm64) {
+    return os::arch::arm64;
+  } else if #(os::detect::i386) {
+    return os::arch::ia32;
+  } else if #(os::detect::mips) {
+    return os::arch::mips;
+  } else if #(os::detect::ppc) {
+    return os::arch::ppc;
+  } else if #(os::detect::ppc64) {
+    return os::arch::ppc64;
+  } else if #(os::detect::amd) {
+    return os::arch::x32;
+  } else if #(os::detect::amd64) {
+    return os::arch::x64;
+  } else {
+    panic("unknown architecture");
+    return 0;
+  }
+
+fn main() -> int {
+  assert(os::arch() == detect());
+  if os::arch() == os::arch::arm { }
+  else if os::arch() == os::arch::arm64 { }
+  else if os::arch() == os::arch::ia32 { }
+  else if os::arch() == os::arch::mips { }
+  else if os::arch() == os::arch::ppc { }
+  else if os::arch() == os::arch::ppc64 { }
+  else if os::arch() == os::arch::x32 { }
+  else if os::arch() == os::arch::x64 { }
+  else { panic("unknown architecture"); }
+  return 0;
+}
