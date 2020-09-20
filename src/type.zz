@@ -13,11 +13,11 @@ export symbol windows;
 /**
  * Get the C string representation of a operating system type symbol.
  */
-export fn nameof(usize type) -> char *
-  model symbol(type)
-  where symbol(type)
+export fn nameof(usize type_name) -> char *
+  model symbol(type_name)
+  where symbol(type_name)
 {
-  return symbols::nameof(type);
+  return symbols::nameof(type_name);
 }
 
 /**
